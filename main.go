@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/gleisonbs/gopoker/game/deck"
+	"github.com/gleisonbs/poker-golang/game/deck"
+	"github.com/gleisonbs/poker-golang/game/table"
 )
 
 func main() {
@@ -16,4 +17,6 @@ func main() {
 	cards := newDeck.Deal(2)
 	fmt.Println(cards)
 	fmt.Println(newDeck)
+
+	table.New(6)
 }

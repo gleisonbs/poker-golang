@@ -1,7 +1,7 @@
 package deck
 
 import (
-	"github.com/gleisonbs/gopoker/game/deck"
+	"github.com/gleisonbs/poker-golang/game/deck"
 
 	"testing"
 )
