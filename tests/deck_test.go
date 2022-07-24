@@ -1,9 +1,9 @@
 package deck
 
 import (
-	"github.com/gleisonbs/poker-golang/game/deck"
-
 	"testing"
+
+	"github.com/gleisonbs/poker-golang/game/deck"
 )
 
 func TestNewDeck(t *testing.T) {
