@@ -8,6 +8,7 @@ const (
 	call
 	bet
 	raise
+	allIn
 )
 
 var Actions = struct {
@@ -16,10 +17,12 @@ var Actions = struct {
 	Call  Action
 	Bet   Action
 	Raise Action
+	AllIn Action
 }{
 	Fold:  fold,
 	Check: check,
 	Call:  call,
 	Bet:   bet,
 	Raise: raise,
+	AllIn: allIn,
 }
