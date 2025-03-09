@@ -2,12 +2,10 @@ package deck
 
 import (
 	"testing"
-
-	"github.com/gleisonbs/poker-golang/game/deck"
 )
 
 func TestNewDeck(t *testing.T) {
-	newDeck := deck.New()
+	newDeck := New()
 	deckSize := 52
 	if len(newDeck.Cards) != deckSize {
 		t.Errorf("Deck has %v cards, expected %v", len(newDeck.Cards), deckSize)
@@ -17,7 +15,7 @@ func TestNewDeck(t *testing.T) {
 func TestDealFromDeck(t *testing.T) {
 	cardsToDeal := 2
 	deckSize := 52
-	newDeck := deck.New()
+	newDeck := New()
 	cards := newDeck.Deal(cardsToDeal)
 	if (len(cards)) != cardsToDeal {
 		t.Errorf("Cards dealt is %v, expected %v", len(cards), cardsToDeal)

@@ -2,13 +2,11 @@ package table
 
 import (
 	"testing"
-
-	"github.com/gleisonbs/poker-golang/game/table"
 )
 
 func TestNewTable(t *testing.T) {
 	nSeats := 9
-	newTable, _ := table.New(nSeats)
+	newTable, _ := New(nSeats)
 	newTable.Start()
 	newTable.SitPlayers()
 
@@ -21,7 +19,7 @@ func TestNewTable(t *testing.T) {
 	}
 
 	nSeats = 6
-	newTable, _ = table.New(nSeats)
+	newTable, _ = New(nSeats)
 	newTable.Start()
 	newTable.SitPlayers()
 
@@ -32,30 +30,30 @@ func TestNewTable(t *testing.T) {
 
 func TestNewTableInvalidSeats(t *testing.T) {
 	nSeats := -2
-	_, err := table.New(nSeats)
+	_, err := New(nSeats)
 
-	if err != table.INVALID_SEAT_NUMBER_ERROR {
+	if err != ErrInvalidSeatNumber {
 		t.Errorf("Expected to throw error for invalid seat number %v, not throw", nSeats)
 	}
 
 	nSeats = 0
-	_, err = table.New(nSeats)
+	_, err = New(nSeats)
 
-	if err != table.INVALID_SEAT_NUMBER_ERROR {
+	if err != ErrInvalidSeatNumber {
 		t.Errorf("Expected to throw error for invalid seat number %v, not throw", nSeats)
 	}
 
 	nSeats = 1
-	_, err = table.New(nSeats)
+	_, err = New(nSeats)
 
-	if err != table.INVALID_SEAT_NUMBER_ERROR {
+	if err != ErrInvalidSeatNumber {
 		t.Errorf("Expected to throw error for invalid seat number %v, not throw", nSeats)
 	}
 
 	nSeats = 13
-	_, err = table.New(nSeats)
+	_, err = New(nSeats)
 
-	if err != table.INVALID_SEAT_NUMBER_ERROR {
+	if err != ErrInvalidSeatNumber {
 		t.Errorf("Expected to throw error for invalid seat number %v, not throw", nSeats)
 	}
 }
@@ -63,7 +61,7 @@ func TestNewTableInvalidSeats(t *testing.T) {
 func TestTableCorectlyCollectsBlinds(t *testing.T) {
 	// WHEN THERE ARE ONLY 2 PLAYERS
 	nSeats := 2
-	newTable, _ := table.New(nSeats)
+	newTable, _ := New(nSeats)
 	newTable.Start()
 	newTable.SitPlayers()
 	newTable.CollectBlinds()
@@ -77,7 +75,7 @@ func TestTableCorectlyCollectsBlinds(t *testing.T) {
 	}
 
 	// WHEN THERE ARE ONLY 2 PLAYERS AND THE DEALER IS THE SECOND PLAYER
-	newTable, _ = table.New(nSeats)
+	newTable, _ = New(nSeats)
 	newTable.Start()
 	newTable.SitPlayers()
 	newTable.UpdateDealerPosition()
@@ -93,7 +91,7 @@ func TestTableCorectlyCollectsBlinds(t *testing.T) {
 
 	// WHEN THERE ARE ONLY 3 PLAYERS
 	nSeats = 3
-	newTable, _ = table.New(nSeats)
+	newTable, _ = New(nSeats)
 	newTable.Start()
 	newTable.SitPlayers()
 	newTable.CollectBlinds()
@@ -112,7 +110,7 @@ func TestTableCorectlyCollectsBlinds(t *testing.T) {
 
 	// WHEN THERE ARE ONLY 3 PLAYERS AND THE DEALER IS THE SECOND PLAYER
 	nSeats = 3
-	newTable, _ = table.New(nSeats)
+	newTable, _ = New(nSeats)
 	newTable.Start()
 	newTable.SitPlayers()
 	newTable.UpdateDealerPosition()
@@ -132,7 +130,7 @@ func TestTableCorectlyCollectsBlinds(t *testing.T) {
 
 	// WHEN THERE ARE ONLY 3 PLAYERS AND THE DEALER IS THE THIRD PLAYER
 	nSeats = 3
-	newTable, _ = table.New(nSeats)
+	newTable, _ = New(nSeats)
 	newTable.Start()
 	newTable.SitPlayers()
 	newTable.UpdateDealerPosition()

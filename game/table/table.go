@@ -2,13 +2,14 @@ package table
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/gleisonbs/poker-golang/game/deck"
 	"github.com/gleisonbs/poker-golang/game/player"
 	"github.com/gleisonbs/poker-golang/game/round"
 )
 
-var INVALID_SEAT_NUMBER_ERROR = errors.New("Seats must be a value between 2 and 12")
+var ErrInvalidSeatNumber = errors.New("seats must be a value between 2 and 12")
 
 type TableState struct {
 	BetValue  int
@@ -35,11 +36,16 @@ type Table struct {
 func New(maxSeats int) (Table, error) {
 	table := Table{}
 	if maxSeats < 2 || maxSeats > 12 {
-		return table, INVALID_SEAT_NUMBER_ERROR
+		return table, ErrInvalidSeatNumber
 	}
 
 	newDeck := deck.New()
-	table = Table{MaxSeats: maxSeats, Deck: newDeck}
+	table = Table{
+		Blinds:   Blinds{Big: 10, Small: 5},
+		Dealer:   maxSeats - 1,
+		Deck:     newDeck,
+		MaxSeats: maxSeats,
+	}
 	return table, nil
 }
 
@@ -56,12 +62,15 @@ func (t *Table) CollectBlinds() {
 
 	smallBlindPlayerIndex := (t.Dealer + 1) % len(t.Players)
 	bigBlindPlayerIndex := (t.Dealer + 2) % len(t.Players)
+
+	fmt.Println(t.Blinds.Big)
+	fmt.Println(t.Blinds.Small)
 	t.Pot += t.Players[bigBlindPlayerIndex].PostBlind(t.Blinds.Big)
 	t.Pot += t.Players[smallBlindPlayerIndex].PostBlind(t.Blinds.Small)
 }
 
-func (t *Table) GetNextPlayerToAct() {
-
+func (t *Table) GetNextPlayerToAct() int {
+	return (t.Dealer + 1) % len(t.Players)
 }
 
 func (t *Table) DealStartingHands() {

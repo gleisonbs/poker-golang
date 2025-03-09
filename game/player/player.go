@@ -43,8 +43,10 @@ func (p *Player) GetAllowedActions(round round.Round) []Action {
 	if p.MoneyInRound == round.CallValue {
 		return []Action{Actions.Fold, Actions.Check, Actions.Bet, Actions.AllIn}
 	}
+
 	if p.MoneyInRound < round.CallValue {
 		return []Action{Actions.Fold, Actions.Call, Actions.Bet, Actions.AllIn}
 	}
+	
 	return []Action{Actions.Fold, Actions.Call, Actions.Check, Actions.AllIn}
 }
